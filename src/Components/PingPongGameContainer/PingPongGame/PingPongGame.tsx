@@ -1,6 +1,7 @@
 import React, {FunctionComponent} from "react";
 import {IBallPosition} from "../../../Common/IBallPosition";
 import styled from "styled-components";
+import {ROCKET_WIDTH} from "../../../Common/constants";
 
 
 interface ScoreProps {
@@ -34,6 +35,7 @@ const Table: FunctionComponent<TableProps> = ({leftPosition, rightPosition, ball
       width: 100vw;
       background: lime;
       position: relative;
+      justify-content: space-between;
     `;
 
     const LeftRocketField = styled.div`
@@ -62,8 +64,9 @@ const Table: FunctionComponent<TableProps> = ({leftPosition, rightPosition, ball
       left: 0;
       top: ${leftPosition}%;
       width: 100%;
-      height: 2vh;
+      height: ${ROCKET_WIDTH}vh;
       z-index: 2;
+      background: blue;
     `;
 
     const RocketRight = styled.div`
@@ -71,8 +74,9 @@ const Table: FunctionComponent<TableProps> = ({leftPosition, rightPosition, ball
       right: 0;
       top: ${rightPosition}%;
       width: 100%;
-      height: 2vh;
+      height: ${ROCKET_WIDTH}vh;
       z-index: 2;
+      background: blue;
     `;
 
     const Ball = styled.span`
@@ -82,6 +86,9 @@ const Table: FunctionComponent<TableProps> = ({leftPosition, rightPosition, ball
       top: ${ballPosition.y}%;
       border-radius: 50%;
       background: brown;
+      z-index: 100;
+      width: 1vw;
+      height: 1vw;
     `;
 
     console.log(leftPosition, rightPosition, ballPosition);
@@ -97,6 +104,7 @@ const Table: FunctionComponent<TableProps> = ({leftPosition, rightPosition, ball
 }
 
 interface PingPongGameProps {
+    onKeyDown: any;
     leftScore: number;
     rightScore: number;
     leftPosition: number;
@@ -105,18 +113,17 @@ interface PingPongGameProps {
 }
 
 const PingPongGame: FunctionComponent<PingPongGameProps> = ({
+                                                                onKeyDown,
                                                                 leftScore,
                                                                 rightScore,
                                                                 leftPosition,
                                                                 rightPosition,
                                                                 ballPosition
                                                             }) => {
-    // add some handlers for buttons
-    console.log('executed');
-    return <>
+    return <div onKeyDown={(event)=>onKeyDown(event)} tabIndex={1}>
         <Score leftScore={leftScore} rightScore={rightScore}/>
         <Table leftPosition={leftPosition} rightPosition={rightPosition} ballPosition={ballPosition}/>
-    </>
+    </div>
 }
 
 export default PingPongGame;
