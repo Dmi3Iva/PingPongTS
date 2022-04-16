@@ -1,7 +1,7 @@
 import React, {FunctionComponent} from "react";
 import {IBallPosition} from "../../../Common/IBallPosition";
 import styled from "styled-components";
-import {ROCKET_WIDTH} from "../../../Common/constants";
+import {GameState, ROCKET_WIDTH} from "../../../Common/constants";
 
 
 interface ScoreProps {
@@ -14,7 +14,6 @@ const Score: FunctionComponent<ScoreProps> = ({leftScore, rightScore}) => {
       text-align: center;
       position: absolute;
       width: 100%;
-      text-align: center;
       z-index: 999;
     `
     return <ScoreStyle>{leftScore}:{rightScore}</ScoreStyle>;
@@ -110,6 +109,7 @@ interface PingPongGameProps {
     leftPosition: number;
     rightPosition: number;
     ballPosition: IBallPosition;
+    gameState: GameState;
 }
 
 const PingPongGame: FunctionComponent<PingPongGameProps> = ({
@@ -118,9 +118,12 @@ const PingPongGame: FunctionComponent<PingPongGameProps> = ({
                                                                 rightScore,
                                                                 leftPosition,
                                                                 rightPosition,
-                                                                ballPosition
+                                                                ballPosition,
+                                                                gameState
                                                             }) => {
-    return <div onKeyDown={(event)=>onKeyDown(event)} tabIndex={1}>
+
+    return <div onKeyDown={onKeyDown} tabIndex={1}>
+        {gameState === GameState.Pause && <h1 >Press anything to start!</h1>}
         <Score leftScore={leftScore} rightScore={rightScore}/>
         <Table leftPosition={leftPosition} rightPosition={rightPosition} ballPosition={ballPosition}/>
     </div>

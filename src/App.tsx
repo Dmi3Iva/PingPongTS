@@ -1,10 +1,13 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-import PingPongGameContainer from "./Components/PingPongGameContainer/PingPongGameContainer";
+import Field from "./Components/Field/Field";
+import GlobalStyle from "./globalStyle";
 
 const App = () =>
-      <PingPongGameContainer/>;
+    <>
+        <GlobalStyle/>
+        <Field/>
+    </>;
 
 
 export default App;
